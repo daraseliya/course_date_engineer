@@ -205,6 +205,20 @@ object App {
 
     println(workerWithMaxSalary + " и " + workerWithMinSalary)
 
+    // пункт n.
+    println("\n-- Пункт n. --")
+    //val yearSalary = readLine().toInt
+    //val annualBonus = readLine().toFloat
+    //val eatBonus = readLine().toInt
+
+    def monthlySalaryFunction(yearSalaryF: Int, annualBonusF: Float, eatBonusF: Int): Double =
+      {
+        val monthlySalaryF = (yearSalaryF * annualBonusF + eatBonusF + yearSalaryF) * 0.87 / 12
+        return monthlySalaryF
+      }
+    println("Ежемесячный оклад сотрудника после вычета налогов:")
+    println(monthlySalaryFunction(yearSalary, annualBonus, eatBonus))
+
     // пункт o.
     println("\n-- Пункт o. --")
     ///рекурсия пример на факториале
@@ -268,7 +282,7 @@ object App {
     println("Введите степень двойки:")
     println("                                          * степень может быть положительной и отрицательной")
     var pow2sample1= readLine().toInt
-    println(power2funcTail(pow2sample1))
+    println("2 в степени "+pow2sample1+ " равно " +power2funcTail(pow2sample1))
   }
 
 }
