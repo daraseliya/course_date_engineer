@@ -81,14 +81,14 @@ object App {
     val middleMinSalary = readLine().toInt
     println("Введите максимальную зарплату для специалистов уровня middle: ")
     val middleMaxSalary = readLine().toInt
-    println("----- Первый способ (не получился, работает только на несортированном списке)")
-    //for (n <- forthList) // не понятный пока момент: почему для отсортированного List выдает ошибку
-    for (n <- firstList)
+    println("----- Первый способ ")
+    //for (n <- forthList) // не понятный пока момент: почему для  List  c insert выдает ошибку
+    for (n <- thirdListSorted) //secondList
     {
       if ((n >= middleMinSalary) && (n <= middleMaxSalary))
         println(f"зп $n  middle")
     }
-    /// можно сделать еще по другому (поскольку верхний работает не совсем так, как хочется):
+    /// можно сделать еще по другому:
     println("----- Другой способ")
 
     var iii = 0
@@ -114,6 +114,97 @@ object App {
     println("\n-- Пункт h. --")
     var fifthList  = thirdListSorted.map(x => x*1.07)
     println("После индексирования зарплаты каждого сотрудника на уровень инфляции\n"+fifthList)
+
+    // ---------------------------------------------------------------------------------------
+
+    // пункт i.
+    println("\n-- Пункт i. --")
+
+    var avrSalaryByMarketJunior = 80
+    var avrSalaryByMarketMiddle = 175
+    var avrSalaryByMarketSenior = 300
+
+    println("Введите среднее значение зарплаты на рынке для Junior: ")
+    avrSalaryByMarketJunior= readLine().toInt
+    println("Введите среднее значение зарплаты на рынке для  Middle: ")
+    avrSalaryByMarketMiddle = readLine().toInt
+    println("Введите среднее значение зарплаты на рынке для  Senior: ")
+    avrSalaryByMarketSenior = readLine().toInt
+
+    var middleSalary = List[Int]()
+    var juniorSalary = List[Int]()
+    var seniorSalary = List[Int]()
+    //junior, middle и senior
+
+    for (j <-thirdListSorted) ////используется начальный список зп firstList (без сортировки) - ошибка из пункта g.
+      {
+        if ((j >= middleMinSalary) && (j <= middleMaxSalary))
+          { middleSalary = j +: middleSalary }
+        else if (j < middleMinSalary)
+          { juniorSalary = j +: juniorSalary  }
+        else seniorSalary = j +: seniorSalary
+
+      }
+
+    //println(juniorSalary)
+    //println(middleSalary)
+    //println(seniorSalary)
+
+    val avrMiddleSalary = middleSalary.sum / middleSalary.size
+    val avrJuniorSalary = juniorSalary.sum / juniorSalary.size
+    val avrSeniorSalary = seniorSalary.sum / seniorSalary.size
+
+    val avrMiddleSalaryDiff:Double = 1-  avrMiddleSalary.toDouble/ avrSalaryByMarketMiddle.toDouble
+    var avrJuniorSalaryDiff:Double = 1- avrJuniorSalary.toDouble / avrSalaryByMarketJunior.toDouble
+    var avrSeniorSalaryDiff:Double = 1- avrSeniorSalary.toDouble / avrSalaryByMarketSenior.toDouble
+
+    println("Junior: " + avrJuniorSalaryDiff)
+    println("Middle: " + avrMiddleSalaryDiff)
+    println("Senior: " + avrSeniorSalaryDiff)
+
+    // пункт k.
+    println("\n-- Пункт k. --")
+
+    //без имени
+    val workerSalaryMap = Map(
+      "Иванов" -> 100,
+      "Петров" -> 150,
+      "Сидоров" -> 80,
+      "Смирнов" -> 75,
+      "Кузнецов" -> 90,
+      "Попов" -> 120,
+      "Васильев"-> 180,
+      "Соколов" -> 200,
+      "Михайлов"-> 350
+    )
+    for ((i, j) <- workerSalaryMap) {
+      println(i, j)
+    }
+
+    // пункт l.
+    println("\n-- Пункт l. --")
+
+    var maxSalary=0
+    var minSalary=thirdListSorted.max
+    var workerWithMaxSalary = ""
+    var workerWithMinSalary = ""
+
+    for ((i,j) <-  workerSalaryMap)
+      {
+        //println(i,j)
+        if (j>maxSalary)
+          {
+            maxSalary = j
+            workerWithMaxSalary = i
+          }
+        if (j < minSalary) {
+          minSalary = j
+          workerWithMinSalary = i
+        }
+      }
+
+    println(workerWithMaxSalary + " и " + workerWithMinSalary)
+
   }
 
 }
