@@ -235,6 +235,7 @@ object App {
 
     //println(factorialTail(5))
 
+
     // для степени двойки (для положительной степени и для отрицательной степени)
 
     def power2func(n: Int): Double = {
@@ -248,7 +249,7 @@ object App {
         power2var
       }
     }
-
+    println("Проверка работы функции:")
     println(power2func(3))
     println(power2func(-2))
 
@@ -263,6 +264,11 @@ object App {
 
     println(power2funcTail(3))
     println(power2funcTail(-2))
+
+    println("Введите степень двойки:")
+    println("                                          * степень может быть положительной и отрицательной")
+    var pow2sample1= readLine().toInt
+    println(power2funcTail(pow2sample1))
   }
 
 }
