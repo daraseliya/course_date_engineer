@@ -205,6 +205,64 @@ object App {
 
     println(workerWithMaxSalary + " и " + workerWithMinSalary)
 
+    // пункт o.
+    println("\n-- Пункт o. --")
+    ///рекурсия пример на факториале
+
+    def factorial(n: Int): Int =
+      {
+        if (n  <= 0) 1
+        else
+          {
+            var fact = n*factorial(n-1)
+            fact
+          }
+      }
+
+    //println(factorial(5))
+
+    // хвостовая рекурсия
+
+    def factorialTail(n: Int): Int =
+      {
+        def loop(x: Int, acc: Int): Int =
+          {
+            if (x<=0) 1
+            else x*loop (x-1,acc)
+          }
+        loop(n,1)
+      }
+
+    //println(factorialTail(5))
+
+    // для степени двойки (для положительной степени и для отрицательной степени)
+
+    def power2func(n: Int): Double = {
+      if (n == 0) 1
+      else if (n > 0){
+        var power2var = 2 * power2func(n - 1)
+        power2var
+      }
+      else  {
+        var power2var =  power2func(n + 1) /2
+        power2var
+      }
+    }
+
+    println(power2func(3))
+    println(power2func(-2))
+
+    def power2funcTail(n: Int): Double = {
+      def loop(x: Int, acc: Int): Double = {
+        if (x == 0) 1
+        else if (x > 0)  2 * loop(x - 1, acc)
+        else  loop(x + 1, acc) /2
+      }
+      loop(n, 1)
+    }
+
+    println(power2funcTail(3))
+    println(power2funcTail(-2))
   }
 
 }
